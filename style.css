@@ -1,0 +1,51 @@
+:root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary: #10b981;
+    --dark: #1f2937;
+    --light: #f3f4f6;
+    --white: #ffffff;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+body { background: var(--light); color: var(--dark); line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Navigation */
+.navbar { background: var(--white); box-shadow: var(--shadow); padding: 1rem 0; sticky: top; z-index: 1000; position: sticky; top: 0; }
+.nav-flex { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+.nav-links { list-style: none; display: flex; gap: 2rem; }
+.nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary); }
+
+/* Buttons */
+.btn { padding: 0.75rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; transition: 0.3s; text-decoration: none; display: inline-block; text-align: center; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-outline { border: 2px solid var(--primary); color: var(--primary); }
+
+/* Grid System */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; padding: 2rem 0; }
+
+/* Product Cards */
+.card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s; }
+.card:hover { transform: translateY(-5px); }
+.card img { width: 100%; height: 250px; object-fit: cover; cursor: pointer; }
+.card-content { padding: 1.5rem; }
+
+/* Search Bar */
+.search-box { width: 100%; max-width: 400px; padding: 0.8rem 1.2rem; border-radius: 50px; border: 1px solid #ddd; outline: none; margin: 1rem 0; }
+
+/* Modal */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background: white; margin: 5% auto; width: 90%; max-width: 800px; border-radius: 15px; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; position: relative; }
+.close { position: absolute; right: 20px; top: 10px; font-size: 2rem; cursor: pointer; }
+
+@media (max-width: 768px) {
+    .modal-content { grid-template-columns: 1fr; margin: 10% auto; }
+}
+
+/* Footer */
+footer { background: var(--dark); color: white; text-align: center; padding: 3rem 0; margin-top: 4rem; }
