@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop All | SwiftShop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <a href="index.html" class="logo">SwiftShop</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html" style="color: var(--primary)">Shop</a></li>
+                <li><a href="contact.html">Support</a></li>
+                <li><a href="cart.html">Cart 🛒</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+            <h1>Shop Collection</h1>
+            <input type="text" id="searchInput" class="search-box" placeholder="Search for items..." onkeyup="search()">
+        </div>
+
+        <div class="grid" id="productGrid">
+            <div class="card" data-name="Ultra Headphones">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" onclick="openModal('Ultra Headphones', 150, 'Noise cancelling high-end headphones.', this.src)">
+                <div class="card-content">
+                    <h3>Ultra Headphones</h3>
+                    <p>$150.00</p>
+                    <button class="btn btn-primary w-full" onclick="addToCart('Ultra Headphones', 150)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Smart Watch">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" onclick="openModal('Smart Watch', 299, 'Track your fitness and sleep 24/7.', this.src)">
+                <div class="card-content">
+                    <h3>Smart Watch</h3>
+                    <p>$299.00</p>
+                    <button class="btn btn-primary w-full" onclick="addToCart('Smart Watch', 299)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeM()">&times;</span>
+            <img id="mImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
+            <div style="padding: 2rem;">
+                <h2 id="mTitle"></h2>
+                <p id="mPrice" style="color: var(--primary); font-size: 1.5rem; font-weight: bold; margin: 1rem 0;"></p>
+                <p id="mDesc" style="margin-bottom: 2rem; color: #666;"></p>
+                <button id="mBtn" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function search() {
+            let filter = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                let name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(filter) ? "block" : "none";
+            });
+        }
+
+        function openModal(name, price, desc, img) {
+            document.getElementById('mTitle').innerText = name;
+            document.getElementById('mPrice').innerText = "$" + price;
+            document.getElementById('mDesc').innerText = desc;
+            document.getElementById('mImg').src = img;
+            document.getElementById('pModal').style.display = "block";
+            document.getElementById('mBtn').onclick = () => addToCart(name, price);
+        }
+
+        function closeM() { document.getElementById('pModal').style.display = "none"; }
+        
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({name, price});
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(name + " added!");
+        }
+    </script>
+</body>
+</html>
